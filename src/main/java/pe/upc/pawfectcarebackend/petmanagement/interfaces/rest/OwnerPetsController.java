@@ -16,15 +16,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/owners/{ownerId}/pets", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Owners")
+@CrossOrigin(origins = {"https://pawfect-care-app-web.web.app","http://localhost:4200"})
 public class OwnerPetsController {
     private final PetQueryService petQueryService;
-    @Value("${FRONTEND_URL}")
-    private String frontendUrl;
 
     public OwnerPetsController(PetQueryService petQueryService) {
         this.petQueryService = petQueryService;
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @GetMapping
     public ResponseEntity<List<PetResource>> getAllPetsByOwnerId(@PathVariable Long ownerId) {
         var getAllPetsByOwnerIdQuery = new GetAllPetsByOwnerIdQuery(ownerId);
