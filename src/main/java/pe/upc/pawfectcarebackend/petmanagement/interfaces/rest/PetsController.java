@@ -24,16 +24,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/pets", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Pets", description = "Pet Management Endpoints")
+@CrossOrigin(origins = {"https://pawfect-care-app-web.web.app","http://localhost:4200"})
 public class PetsController {
-    @Value("${FRONTEND_URL}")
-    private String frontendUrl;
+
     private final PetQueryService petQueryService;
     private final PetCommandService petCommandService;
     public PetsController(PetQueryService petQueryService,PetCommandService petCommandService) {
         this.petQueryService = petQueryService;
         this.petCommandService = petCommandService;
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @PostMapping
     public ResponseEntity<PetResource> createPet(@RequestBody CreatePetResource createPetResource) {
         var createPetCommand = CreatePetCommandFromResourceAssembler.toCommandFromResource(createPetResource);
@@ -47,7 +47,7 @@ public class PetsController {
         var petResource = PetResourceFromEntityAssembler.toResourceFromEntity(pet.get());
         return new ResponseEntity<>(petResource, HttpStatus.CREATED);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @GetMapping
     public ResponseEntity<List<PetResource>> getAllPets() {
         var getAllPetsQuery = new GetAllPetsQuery();
@@ -55,7 +55,7 @@ public class PetsController {
         var petResources = pets.stream().map(PetResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(petResources);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @GetMapping("/{petId}")
     public ResponseEntity<PetResource> getPetById(@PathVariable Long petId) {
         var getPetByIdQuery = new GetPetByIdQuery(petId);
@@ -64,7 +64,7 @@ public class PetsController {
         var petResource = PetResourceFromEntityAssembler.toResourceFromEntity(pet.get());
         return ResponseEntity.ok(petResource);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @PutMapping("/{petId}")
     public ResponseEntity<PetResource> updatePet(@PathVariable Long petId, @RequestBody UpdatePetResource updatePetResource) {
         var updatePetCommand = UpdatePetCommandFromResourceAssembler.toCommandFromResource(petId, updatePetResource);
@@ -75,7 +75,7 @@ public class PetsController {
         var petResource = PetResourceFromEntityAssembler.toResourceFromEntity(updatedPet.get());
         return ResponseEntity.ok(petResource);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @DeleteMapping("/{petId}")
     public ResponseEntity<?> deletePet(@PathVariable Long petId) {
         var deletePetCommand = new DeletePetCommand(petId);

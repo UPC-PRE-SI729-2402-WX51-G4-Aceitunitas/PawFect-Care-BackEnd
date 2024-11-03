@@ -24,17 +24,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/owners", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Owners", description = "Owners Management Endpoints")
-
+@CrossOrigin(origins = {"https://pawfect-care-app-web.web.app","http://localhost:4200"})
 public class OwnersController {
-    @Value("${FRONTEND_URL}")
-    private String frontendUrl;
+
     private final OwnerQueryService ownerQueryService;
     private final OwnerCommandService ownerCommandService;
     public OwnersController(OwnerQueryService ownerQueryService,OwnerCommandService ownerCommandService) {
         this.ownerCommandService = ownerCommandService;
         this.ownerQueryService = ownerQueryService;
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @GetMapping("/{ownerId}")
     public ResponseEntity<OwnerResource> getOwnerById(@PathVariable Long ownerId) {
         var getOwnerByIdQuery = new GetOwnerByIdQuery(ownerId);
@@ -43,7 +42,7 @@ public class OwnersController {
         var ownerResource = OwnerResourceFromEntityAssembler.toResourceFromEntity(owner.get());
         return ResponseEntity.ok(ownerResource);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @GetMapping
     public ResponseEntity<List<OwnerResource>> getAllOwners() {
         var getAllOwnersQuery = new GetAllOwnersQuery();
@@ -51,7 +50,7 @@ public class OwnersController {
         var petResources = owners.stream().map(OwnerResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(petResources);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @PostMapping
     public ResponseEntity<OwnerResource> createOwner(@RequestBody CreateOwnerResource createOwnerResource) {
         var createOwnerCommand = CreateOwnerCommandFromResourceAssembler.toCommandFromResource(createOwnerResource);
@@ -65,7 +64,7 @@ public class OwnersController {
      var ownerResource = OwnerResourceFromEntityAssembler.toResourceFromEntity(owner.get());
         return new ResponseEntity<>(ownerResource, HttpStatus.CREATED);
     }
-    @CrossOrigin(origins = "${FRONTEND_URL}")
+
     @PutMapping("/{ownerId}")
     public ResponseEntity<OwnerResource> updateOwner(@PathVariable Long ownerId, @RequestBody UpdateOwnerResource updateOwnerResource) {
         var updateOwnerCommand = UpdateOwnerCommandFromResourceAssembler.toCommandFromResource(ownerId, updateOwnerResource);
