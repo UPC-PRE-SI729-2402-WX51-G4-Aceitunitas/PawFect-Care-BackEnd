@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.DeletePetCommand;
 import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetAllPetsQuery;
 import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetPetByIdQuery;
 import pe.upc.pawfectcarebackend.petManagement.domain.services.PetCommandService;
@@ -22,6 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/pets", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Pets", description = "Pet Management Endpoints")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PetsController {
 
     private final PetQueryService petQueryService;
@@ -70,6 +72,13 @@ public class PetsController {
         }
         var petResource = PetResourceFromEntityAssembler.toResourceFromEntity(updatedPet.get());
         return ResponseEntity.ok(petResource);
+    }
+
+    @DeleteMapping("/{petId}")
+    public ResponseEntity<?> deletePet(@PathVariable Long petId) {
+        var deletePetCommand = new DeletePetCommand(petId);
+        petCommandService.handle(deletePetCommand);
+        return ResponseEntity.ok("Pet with given id successfully deleted");
     }
 
 

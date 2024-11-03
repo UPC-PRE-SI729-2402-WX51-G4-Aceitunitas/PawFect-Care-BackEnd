@@ -41,7 +41,7 @@ public class OwnerCommandServiceImpl implements OwnerCommandService {
         var result = ownerRepository.findById(command.id());
         var ownerToUpdate = result.get();
         try {
-            var updatedOwner = ownerRepository.save(ownerToUpdate.updateInformation(command.fullName(),command.phoneNumber(),command.address(),command.email()));
+            var updatedOwner = ownerRepository.save(ownerToUpdate.updateInformation(command.fullName(),command.phoneNumber(),command.email(),command.address()));
             return Optional.of(updatedOwner);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while updating owner: " + e.getMessage());

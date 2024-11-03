@@ -18,15 +18,15 @@ public class Owner extends AuditableAbstractAggregateRoot<Owner> {
     private String phoneNumber;
     private String email;
     private String address;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pet> pets;
+//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Pet> pets;
 
     public Owner() {
         this.fullName = Strings.EMPTY;
         this.phoneNumber = Strings.EMPTY;
         this.email = Strings.EMPTY;
         this.address = Strings.EMPTY;
-        this.pets = new ArrayList<>();
+//        this.pets = new ArrayList<>();
     }
     public Owner(CreateOwnerCommand command) {
         this();
@@ -42,8 +42,8 @@ public class Owner extends AuditableAbstractAggregateRoot<Owner> {
         this.address = address;
         return this;
     }
-    public void addPetToOwner(Pet pet) {
-        pets.add(pet);
-    }
+//    public void addPetToOwner(Pet pet) {
+//        pets.add(pet);
+//    }
 
 }

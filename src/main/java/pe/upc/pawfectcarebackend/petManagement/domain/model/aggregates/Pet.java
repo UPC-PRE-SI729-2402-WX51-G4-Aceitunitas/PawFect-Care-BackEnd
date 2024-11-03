@@ -44,12 +44,13 @@ public class Pet extends AuditableAbstractAggregateRoot<Pet> {
         this.petGender = PetGender.FEMALE;
         this.owner = new Owner();
     }
-    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender) {
+    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender, Owner owner) {
         this.petName = petName;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
         this.animalBreed = animalBreed;
         this.petGender = petGender;
+        this.owner= owner;
         return this;
     }
 

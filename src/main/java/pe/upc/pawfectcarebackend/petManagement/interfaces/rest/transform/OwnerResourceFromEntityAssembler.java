@@ -11,7 +11,6 @@ public class OwnerResourceFromEntityAssembler {
                 entity.getFullName(),
                 entity.getPhoneNumber(),
                 entity.getEmail(),
-                entity.getAddress(),
-                entity.getPets());
+                entity.getAddress());
     }
 }

@@ -26,4 +26,7 @@ public class OwnerQueryServiceImpl implements OwnerQueryService {
     public List<Owner> handle(GetAllOwnersQuery query) {
         return ownerRepository.findAll();
     }
+
+
+
 }
