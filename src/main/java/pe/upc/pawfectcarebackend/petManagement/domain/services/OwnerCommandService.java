@@ -1,7 +1,7 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.services;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Owner;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.CreateOwnerCommand;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.UpdateOwnerCommand;
+package pe.upc.pawfectcarebackend.petmanagement.domain.services;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Owner;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.CreateOwnerCommand;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.UpdateOwnerCommand;
 import java.util.Optional;
 
 public interface OwnerCommandService {

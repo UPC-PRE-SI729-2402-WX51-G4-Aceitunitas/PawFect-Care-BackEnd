@@ -1,4 +1,4 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.model.queries;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.queries;
 
 public record GetAllPetsQuery() {
 //    public GetAllPetsQuery {

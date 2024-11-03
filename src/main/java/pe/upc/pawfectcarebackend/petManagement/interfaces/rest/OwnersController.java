@@ -1,20 +1,21 @@
-package pe.upc.pawfectcarebackend.petManagement.interfaces.rest;
+package pe.upc.pawfectcarebackend.petmanagement.interfaces.rest;
 
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetAllOwnersQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetOwnerByIdQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.services.OwnerCommandService;
-import pe.upc.pawfectcarebackend.petManagement.domain.services.OwnerQueryService;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources.CreateOwnerResource;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources.OwnerResource;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources.UpdateOwnerResource;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.transform.CreateOwnerCommandFromResourceAssembler;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.transform.OwnerResourceFromEntityAssembler;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.transform.UpdateOwnerCommandFromResourceAssembler;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetAllOwnersQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetOwnerByIdQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.services.OwnerCommandService;
+import pe.upc.pawfectcarebackend.petmanagement.domain.services.OwnerQueryService;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.CreateOwnerResource;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.OwnerResource;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.UpdateOwnerResource;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.transform.CreateOwnerCommandFromResourceAssembler;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.transform.OwnerResourceFromEntityAssembler;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.transform.UpdateOwnerCommandFromResourceAssembler;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/owners", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Owners", description = "Owners Management Endpoints")
-
+@CrossOrigin(origins = {"https://pawfect-care-app-web.web.app","http://localhost:4200"})
 public class OwnersController {
 
     private final OwnerQueryService ownerQueryService;
@@ -32,6 +33,7 @@ public class OwnersController {
         this.ownerCommandService = ownerCommandService;
         this.ownerQueryService = ownerQueryService;
     }
+
     @GetMapping("/{ownerId}")
     public ResponseEntity<OwnerResource> getOwnerById(@PathVariable Long ownerId) {
         var getOwnerByIdQuery = new GetOwnerByIdQuery(ownerId);

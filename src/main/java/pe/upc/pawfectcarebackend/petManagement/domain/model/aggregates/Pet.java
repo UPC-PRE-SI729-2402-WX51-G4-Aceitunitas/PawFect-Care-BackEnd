@@ -1,9 +1,9 @@
 /**
  * Pet aggregate
  * @Summary
- * The petManagement  class is an aggregate that represents a  petManagement .
+ * The petmanagement  class is an aggregate that represents a  petmanagement .
  */
-package pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,8 +12,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 import org.apache.logging.log4j.util.Strings;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.CreatePetCommand;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.valueobjects.PetGender;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.CreatePetCommand;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGender;
 import pe.upc.pawfectcarebackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 
@@ -44,12 +44,13 @@ public class Pet extends AuditableAbstractAggregateRoot<Pet> {
         this.petGender = PetGender.FEMALE;
         this.owner = new Owner();
     }
-    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender) {
+    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender, Owner owner) {
         this.petName = petName;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
         this.animalBreed = animalBreed;
         this.petGender = petGender;
+        this.owner= owner;
         return this;
     }
 

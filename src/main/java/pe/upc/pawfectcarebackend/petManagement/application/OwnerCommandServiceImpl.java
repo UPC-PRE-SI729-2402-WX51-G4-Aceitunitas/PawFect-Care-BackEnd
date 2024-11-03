@@ -1,14 +1,12 @@
-package pe.upc.pawfectcarebackend.petManagement.application;
+package pe.upc.pawfectcarebackend.petmanagement.application;
 
 import org.springframework.stereotype.Service;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Owner;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Pet;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.CreateOwnerCommand;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.UpdateOwnerCommand;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.commands.UpdatePetCommand;
-import pe.upc.pawfectcarebackend.petManagement.domain.services.OwnerCommandService;
-import pe.upc.pawfectcarebackend.petManagement.infrastructure.persistence.jpa.repositories.OwnerRepository;
-import pe.upc.pawfectcarebackend.petManagement.infrastructure.persistence.jpa.repositories.PetRepository;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Owner;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.CreateOwnerCommand;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.UpdateOwnerCommand;
+import pe.upc.pawfectcarebackend.petmanagement.domain.services.OwnerCommandService;
+import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.repositories.OwnerRepository;
+import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.repositories.PetRepository;
 
 import java.util.Optional;
 
@@ -41,7 +39,7 @@ public class OwnerCommandServiceImpl implements OwnerCommandService {
         var result = ownerRepository.findById(command.id());
         var ownerToUpdate = result.get();
         try {
-            var updatedOwner = ownerRepository.save(ownerToUpdate.updateInformation(command.fullName(),command.phoneNumber(),command.address(),command.email()));
+            var updatedOwner = ownerRepository.save(ownerToUpdate.updateInformation(command.fullName(),command.phoneNumber(),command.email(),command.address()));
             return Optional.of(updatedOwner);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while updating owner: " + e.getMessage());

@@ -1,8 +1,8 @@
-package pe.upc.pawfectcarebackend.petManagement.interfaces.rest.transform;
+package pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.transform;
 
 
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Owner;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources.OwnerResource;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Owner;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.OwnerResource;
 
 public class OwnerResourceFromEntityAssembler {
     public static OwnerResource toResourceFromEntity(Owner entity) {
@@ -11,7 +11,6 @@ public class OwnerResourceFromEntityAssembler {
                 entity.getFullName(),
                 entity.getPhoneNumber(),
                 entity.getEmail(),
-                entity.getAddress(),
-                entity.getPets());
+                entity.getAddress());
     }
 }

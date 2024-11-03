@@ -1,7 +1,7 @@
-package pe.upc.pawfectcarebackend.petManagement.interfaces.rest.transform;
+package pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.transform;
 
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Pet;
-import pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources.PetResource;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Pet;
+import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.PetResource;
 
 public class PetResourceFromEntityAssembler {
     public static PetResource toResourceFromEntity(Pet entity) {

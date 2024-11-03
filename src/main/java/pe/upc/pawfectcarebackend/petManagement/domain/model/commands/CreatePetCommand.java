@@ -4,10 +4,10 @@
  *  CreatePetCommand is a record class that represents the command create
  **/
 
-package pe.upc.pawfectcarebackend.petManagement.domain.model.commands;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.commands;
 
 
-import pe.upc.pawfectcarebackend.petManagement.domain.model.valueobjects.PetGender;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGender;
 
 import java.time.LocalDate;
 

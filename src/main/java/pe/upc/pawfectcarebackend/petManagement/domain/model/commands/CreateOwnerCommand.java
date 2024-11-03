@@ -1,4 +1,4 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.model.commands;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.commands;
 
 public record CreateOwnerCommand(
         String fullName,

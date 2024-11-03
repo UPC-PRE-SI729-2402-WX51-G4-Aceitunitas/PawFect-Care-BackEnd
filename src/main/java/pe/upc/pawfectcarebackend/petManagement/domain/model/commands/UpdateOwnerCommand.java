@@ -1,8 +1,8 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.model.commands;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.commands;
 
 public record UpdateOwnerCommand( Long id,
                                   String fullName,
-                                      String phoneNumber,
-                                      String email,
-                                      String address) {
+                                  String phoneNumber,
+                                  String email,
+                                  String address) {
 }

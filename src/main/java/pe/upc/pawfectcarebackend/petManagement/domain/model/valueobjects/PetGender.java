@@ -1,4 +1,4 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.model.valueobjects;
+package pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects;
 
 public enum PetGender {
     MALE,

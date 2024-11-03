@@ -1,11 +1,11 @@
-package pe.upc.pawfectcarebackend.petManagement.application;
+package pe.upc.pawfectcarebackend.petmanagement.application;
 
 import org.springframework.stereotype.Service;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Owner;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetAllOwnersQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetOwnerByIdQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.services.OwnerQueryService;
-import pe.upc.pawfectcarebackend.petManagement.infrastructure.persistence.jpa.repositories.OwnerRepository;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Owner;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetAllOwnersQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetOwnerByIdQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.services.OwnerQueryService;
+import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.repositories.OwnerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +26,7 @@ public class OwnerQueryServiceImpl implements OwnerQueryService {
     public List<Owner> handle(GetAllOwnersQuery query) {
         return ownerRepository.findAll();
     }
+
+
+
 }

@@ -1,8 +1,8 @@
-package pe.upc.pawfectcarebackend.petManagement.domain.services;
+package pe.upc.pawfectcarebackend.petmanagement.domain.services;
 
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Owner;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetAllOwnersQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetOwnerByIdQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Owner;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetAllOwnersQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetOwnerByIdQuery;
 
 import java.util.List;
 import java.util.Optional;

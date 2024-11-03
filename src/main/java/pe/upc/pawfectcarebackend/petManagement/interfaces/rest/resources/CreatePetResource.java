@@ -1,6 +1,6 @@
-package pe.upc.pawfectcarebackend.petManagement.interfaces.rest.resources;
+package pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources;
 
-import pe.upc.pawfectcarebackend.petManagement.domain.model.valueobjects.PetGender;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGender;
 
 import java.time.LocalDate;
 

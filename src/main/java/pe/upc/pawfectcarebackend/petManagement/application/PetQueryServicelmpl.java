@@ -1,11 +1,12 @@
-package pe.upc.pawfectcarebackend.petManagement.application;
+package pe.upc.pawfectcarebackend.petmanagement.application;
 
 import org.springframework.stereotype.Service;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.aggregates.Pet;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetAllPetsQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.model.queries.GetPetByIdQuery;
-import pe.upc.pawfectcarebackend.petManagement.domain.services.PetQueryService;
-import pe.upc.pawfectcarebackend.petManagement.infrastructure.persistence.jpa.repositories.PetRepository;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Pet;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetAllPetsByOwnerIdQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetAllPetsQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.model.queries.GetPetByIdQuery;
+import pe.upc.pawfectcarebackend.petmanagement.domain.services.PetQueryService;
+import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.repositories.PetRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,9 @@ public class PetQueryServicelmpl implements PetQueryService {
         }
         return petRepository.findById(query.petId());
     }
-
+    @Override
+    public List<Pet> handle(GetAllPetsByOwnerIdQuery query) {
+        return petRepository.findAllByOwnerId(query.ownerId());
+    }
 
 }
