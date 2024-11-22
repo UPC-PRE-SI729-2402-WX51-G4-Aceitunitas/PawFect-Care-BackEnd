@@ -11,9 +11,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import lombok.Setter;
 import org.apache.logging.log4j.util.Strings;
-import pe.upc.pawfectcarebackend.medicalrecords.domain.model.aggregates.MedicalHistory;
 import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.CreatePetCommand;
 import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGender;
 import pe.upc.pawfectcarebackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
@@ -30,20 +28,12 @@ public class Pet extends AuditableAbstractAggregateRoot<Pet> {
     @Enumerated(EnumType.STRING)
     private PetGender petGender;
 
-    @Setter
     @Getter
     @ManyToOne
     @JoinColumn(name = "owner_id")
     @NotNull
     @JsonIgnore
     private Owner owner;
-
-    @Setter
-    @Getter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "medical_history_id")
-    private MedicalHistory medicalHistory;
-
 
 
     public Pet() {
@@ -52,13 +42,15 @@ public class Pet extends AuditableAbstractAggregateRoot<Pet> {
         this.registrationDate = LocalDate.now();
         this.animalBreed = Strings.EMPTY;
         this.petGender = PetGender.FEMALE;
+        this.owner = new Owner();
     }
-    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender) {
+    public Pet updateInformation(String petName, LocalDate birthDate,LocalDate registrationDate, String animalBreed, PetGender petGender, Owner owner) {
         this.petName = petName;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
         this.animalBreed = animalBreed;
         this.petGender = petGender;
+        this.owner= owner;
         return this;
     }
 
@@ -69,6 +61,11 @@ public class Pet extends AuditableAbstractAggregateRoot<Pet> {
         this.animalBreed = command.animalBreed();
         this.petGender = command.petGender();
     }
+
+   public void addOwnerToPet(Owner owner){
+        System.out.println("Adding owner to pet");
+       this.owner=owner;
+   }
 
 
 }

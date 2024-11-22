@@ -5,12 +5,6 @@ import pe.upc.pawfectcarebackend.petmanagement.interfaces.rest.resources.UpdateP
 
 public class UpdatePetCommandFromResourceAssembler {
     public static UpdatePetCommand toCommandFromResource(Long petId, UpdatePetResource resource) {
-        return new UpdatePetCommand(
-                petId,
-                resource.petName(),
-                resource.birthDate(),
-                resource.registrationDate(),
-                resource.animalBreed(),
-                resource.petGender());
+        return new UpdatePetCommand(petId, resource.petName(),resource.birthDate(),resource.registrationDate(),resource.animalBreed(),resource.petGender(),resource.ownerId());
     }
 }

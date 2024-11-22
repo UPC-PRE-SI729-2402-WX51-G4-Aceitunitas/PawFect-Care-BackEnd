@@ -4,11 +4,7 @@ import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGend
 
 import java.time.LocalDate;
 
-public record UpdatePetResource(
-        String petName,
-        LocalDate birthDate,
-        LocalDate registrationDate,
-        String animalBreed,
-        PetGender petGender) {
+public record UpdatePetResource(String petName, LocalDate birthDate, LocalDate registrationDate,
+                                String animalBreed, PetGender petGender,Long ownerId) {
 
 }

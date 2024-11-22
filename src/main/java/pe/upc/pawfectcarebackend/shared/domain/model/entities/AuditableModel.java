@@ -16,7 +16,7 @@ public class AuditableModel {
     @Getter
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private Date createdAt;
+    private Date creeatedAt;
 
     @Getter
     @LastModifiedDate
