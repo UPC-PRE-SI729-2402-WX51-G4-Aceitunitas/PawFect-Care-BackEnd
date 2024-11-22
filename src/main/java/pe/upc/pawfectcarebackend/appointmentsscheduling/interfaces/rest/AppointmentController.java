@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import pe.upc.pawfectcarebackend.appointmentsscheduling.domain.model.aggregates.MedicalAppointment;
 import pe.upc.pawfectcarebackend.appointmentsscheduling.domain.model.commands.CreateMedicalAppointmentCommand;
 import pe.upc.pawfectcarebackend.appointmentsscheduling.domain.model.queries.GetAllAppointmentsQuery;
 import pe.upc.pawfectcarebackend.appointmentsscheduling.domain.model.queries.GetAppointmentByIdQuery;
