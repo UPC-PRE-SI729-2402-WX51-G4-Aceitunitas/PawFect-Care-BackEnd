@@ -1,6 +1,7 @@
 package pe.upc.pawfectcarebackend.petmanagement.application;
 
 import org.springframework.stereotype.Service;
+import pe.upc.pawfectcarebackend.petmanagement.application.acl.ExternalMedicalHistoryService;
 import pe.upc.pawfectcarebackend.petmanagement.domain.model.aggregates.Pet;
 import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.CreatePetCommand;
 import pe.upc.pawfectcarebackend.petmanagement.domain.model.commands.DeletePetCommand;
@@ -10,13 +11,17 @@ import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.re
 import pe.upc.pawfectcarebackend.petmanagement.infrastructure.persistence.jpa.repositories.PetRepository;
 
 import java.util.Optional;
+
 @Service
 public class PetCommandServicelmpl implements PetCommandService {
     private final PetRepository petRepository;
-    private  final OwnerRepository ownerRepository;
-    public PetCommandServicelmpl(PetRepository petRepository, OwnerRepository ownerRepository) {
+    private final OwnerRepository ownerRepository;
+    private final ExternalMedicalHistoryService externalMedicalHistoryService;
+
+    public PetCommandServicelmpl(PetRepository petRepository, OwnerRepository ownerRepository, ExternalMedicalHistoryService externalMedicalHistoryService) {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
+        this.externalMedicalHistoryService = externalMedicalHistoryService;
     }
 
 
@@ -24,10 +29,17 @@ public class PetCommandServicelmpl implements PetCommandService {
     public Long handle(CreatePetCommand command) {
         var pet = new Pet(command);
         try {
-            if (!ownerRepository.existsById(command.ownerId())) throw new IllegalArgumentException("ownerId does not exist");
+
             var owner = ownerRepository.findById(command.ownerId());
-            var ownerToAdd = owner.get();
-            pet.addOwnerToPet(ownerToAdd);
+            if (owner.isEmpty()) throw new IllegalArgumentException("ownerId does not exist");
+            pet.setOwner(owner.get());
+
+            var newMedicalHistory = externalMedicalHistoryService.createMedicalHistory(
+                    String.format("General notes for medical history %s ", pet.getPetName())
+            );
+            if (newMedicalHistory.isEmpty()) throw new IllegalArgumentException("Unable to create MedicalHistoryService");
+            pet.setMedicalHistory(newMedicalHistory.get());
+
             petRepository.save(pet);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while saving pet: " + e.getMessage());
@@ -40,19 +52,15 @@ public class PetCommandServicelmpl implements PetCommandService {
     public Optional<Pet> handle(UpdatePetCommand command) {
         if (!petRepository.existsById(command.id())) throw new IllegalArgumentException("petId does not exist");
         var result = petRepository.findById(command.id());
+        if (result.isEmpty()) throw new IllegalArgumentException("Pet does not exist");
         var petToUpdate = result.get();
-        if (!ownerRepository.existsById(command.ownerId())) throw new IllegalArgumentException("ownerId does not exist");
-        var owner = ownerRepository.findById(command.ownerId());
-        var ownerToUpdate = owner.get();
         try {
-
-            var updatedPet = petRepository.save(petToUpdate.updateInformation(command.petName(),command.birthDate(),command.registrationDate(),command.animalBreed(),command.petGender(),ownerToUpdate));
+            var updatedPet = petRepository.save(petToUpdate.updateInformation(command.petName(), command.birthDate(), command.registrationDate(), command.animalBreed(), command.petGender()));
             return Optional.of(updatedPet);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while updating pet: " + e.getMessage());
         }
     }
-
 
 
     @Override

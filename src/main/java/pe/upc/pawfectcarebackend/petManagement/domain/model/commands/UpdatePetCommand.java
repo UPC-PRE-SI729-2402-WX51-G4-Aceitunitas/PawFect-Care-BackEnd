@@ -6,5 +6,5 @@ import pe.upc.pawfectcarebackend.petmanagement.domain.model.valueobjects.PetGend
 import java.time.LocalDate;
 
 public record UpdatePetCommand(Long id, String petName, LocalDate birthDate,LocalDate registrationDate,
-                               String animalBreed, PetGender petGender,Long ownerId) {
+                               String animalBreed, PetGender petGender) {
 }

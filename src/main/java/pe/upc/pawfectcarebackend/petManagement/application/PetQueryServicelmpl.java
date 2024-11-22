@@ -19,7 +19,6 @@ public class PetQueryServicelmpl implements PetQueryService {
         this.petRepository = petRepository;
     }
 
-
     @Override
     public List<Pet> handle(GetAllPetsQuery query) {
         return petRepository.findAll();
@@ -32,9 +31,12 @@ public class PetQueryServicelmpl implements PetQueryService {
         }
         return petRepository.findById(query.petId());
     }
+
     @Override
     public List<Pet> handle(GetAllPetsByOwnerIdQuery query) {
         return petRepository.findAllByOwnerId(query.ownerId());
     }
+
+
 
 }
